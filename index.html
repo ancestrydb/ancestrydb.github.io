@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ancestryDB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="hero text-center">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-8">
+          <span class="brand-pill">ancestryDB</span>
+          <h1 class="display-4 mt-3">Failure-tolerant DBMS for genealogy data</h1>
+          <p class="lead muted">Open-source and specialized storage and query primitives for family trees, relationships and historical records. Built in Erlang with a focus on availability and data integrity.</p>
+          <div class="d-flex justify-content-center gap-3 mt-4">
+            <a class="btn btn-primary btn-lg" href="#features">Docs</a>
+            <a class="btn btn-outline-light btn-lg" href="https://github.com/ancestryDB" target="_blank"><i class="bi bi-github me-2"></i>View on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="features" class="my-5">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-dark h-100">
+            <h5>Failure-tolerant design</h5>
+            <p class="muted mb-0">Automatic node replication, conflict-resilient merges, distributed consensus for high availability.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-dark h-100">
+            <h5>Graph-native model</h5>
+            <p class="muted mb-0">People, events, places, and relationships as first-class entities. Query family trees effectively.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-dark h-100">
+            <h5>Multi-language drivers</h5>
+            <p class="muted mb-0">Official drivers for Python — lightweight, typed protocol, simple integration.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <div class="card-dark">
+            <h5>Why ancestryDB?</h5>
+            <p class="muted">Built for genealogy, it handles large, branching family trees, uncertain dates and sources, and keeps provenance for every change.</p>
+            <ul class="muted">
+              <li>Provenance-aware storage</li>
+              <li>Temporal queries (approximate dates)</li>
+              <li>Flexible schema for events, people, documents</li>
+              <li>Compact binary on-disk format</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drivers" class="my-5">
+      <h3>Drivers & Integrations</h3>
+      <p class="muted">Official driver for Python focuses on stability and clear semantics.</p>
+
+      <div class="row g-4 mt-3">
+        <div class="col-lg-12">
+          <div class="card-dark lang-card h-100">
+            <pre class="code"><code class="language-python">from ancestrydb import Ancestry
+
+# Connect to server
+conn = Ancestry.connect(host='localhost', port=3863)
+
+# Create person with sources
+person = conn.create_person(name='John Doe', sources=['census_1890'])
+
+# Add relationship
+conn.add_relationship(person, 'Jane Doe', relation='spouse')
+
+# Query people born around 1850
+results = conn.search(birth_year={'approx': (1850, 5)})
+for r in results:
+    print(r.name, r.birth_year)</code></pre>
+            <a class="btn btn-outline-light btn-github" href="https://github.com/ancestryDB/ancestry-py" target="_blank"><i class="bi bi-github me-2"></i>View Python Driver Code</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="advanced" class="my-5">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Advanced topics</h3>
+          <ul class="muted">
+            <li><strong>Replication topology:</strong> multi-master with vector-clock merges for eventual consistency or quorum writes for strong consistency.</li>
+            <li><strong>Provenance and sources:</strong> attach structured citations and keep an immutable history for each node.</li>
+            <li><strong>Storage:</strong> compact binary tree format with on-disk sharding per top-level surname for large datasets.</li>
+            <li><strong>Migrations:</strong> safe schema migrations and tooling to import GEDCOM and reconcile duplicate records.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <p class="mb-1">ancestryDB — open-source genealogy DBMS • Built in Erlang</p>
+          <p class="muted small">Contribute, report issues and find docs on GitHub: <a href="https://github.com/ancestryDB" class="text-decoration-underline">github.com/ancestryDB</a></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
